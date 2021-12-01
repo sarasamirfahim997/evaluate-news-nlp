@@ -14,10 +14,10 @@ const API_KEY = process.env.API_KEY
 
 app.post('/evaluate', (req, res)=>{
     const {url} = req.body
-    axios.post(`https://api.meaningcloud.com/summarization-1.0?key=${API_KEY}&sentences=2&url=${url}`)
+    axios.post(`https://api.meaningcloud.com/sentiment-2.1?key=${API_KEY}&url=${url}&lang=en`)
     .then(response=>{
-        const {summary} = response.data
-        res.send(summary)
+        const {agreement, subjectivity, confidence, irony } = response.data
+        res.send({agreement, subjectivity, confidence, irony })
     })
 })
 
